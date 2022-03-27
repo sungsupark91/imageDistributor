@@ -1,0 +1,22 @@
+{
+    "sourceBasePath": "/Users/sungsupark/Desktop/test/source",
+    "destinationBasePath": "/Users/sungsupark/Desktop/test/target",
+    "targetExtensions": ["ARW", "DNG", "RAF", "JPG", "JPEG", "PNG", "HEIC", "MP4", "MOV"],
+    "rules": [
+        {
+            "use": true,
+            "targetExtensions": ["ARW"],
+            "subDirectoryName": "A7M3-Raw"
+        },
+        {
+            "use": true,
+            "targetExtensions": ["RAF"],
+            "subDirectoryName": "X100V-Raw"
+        },
+        {
+            "use": true,
+            "targetExtensions": ["MP4", "MOV"],
+            "subDirectoryName": "영상"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "imagedistributor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "exiftool-vendored": "^16.0.0",
+    "fs": "0.0.1-security"
+  }
+}
