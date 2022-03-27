@@ -1,6 +1,6 @@
 {
-    "sourceBasePath": "/volume1/photo/이미지자동분류",
-    "destinationBasePath": "/volume1/photo/분류됨",
+    "sourceBasePath": "/Users/sungsupark/Desktop/test/source",
+    "destinationBasePath": "/Users/sungsupark/Desktop/test/target",
     "targetExtensions": ["ARW", "DNG", "RAF", "JPG", "JPEG", "PNG", "HEIC", "MP4", "MOV"],
     "rules": [
         {
