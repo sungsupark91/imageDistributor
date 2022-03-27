@@ -1,4 +1,4 @@
-const ExifTool = require("exiftool-vendored").ExifTool;
+const exiftool = require("exiftool-vendored").exiftool;
 const Path = require("path");
 
 function getDate(tags) {
@@ -41,10 +41,7 @@ function getFilmInfo(tags) {
 
 module.exports = {
     parseImage: async (imagePath) => {
-        let exiftool;
-
         try {
-            exiftool = new ExifTool({ taskTimeoutMillis: 5000 });
             const tags = await exiftool.read(Path.resolve(imagePath));
 
             const isPhone =
@@ -58,8 +55,8 @@ module.exports = {
                 type: tags.Model,
                 filmInfo: getFilmInfo(tags),
             };
-        } finally {
-            if (exiftool) exiftool.end();
+        } catch (e) {
+            console.error(e);
         }
     },
 };
