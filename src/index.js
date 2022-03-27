@@ -136,6 +136,11 @@ const watcher = chokidar.watch(profile.sourceBasePath, {
 });
 
 watcher.on("add", (path) => {
+    // source 최상위 폴더에 들어오는 이미지가 아닌 경우 처리하지 않는다.
+    if (Path.dirname(path) !== profile.sourceBasePath) {
+        return;
+    }
+
     if (!isTarget(path)) {
         return;
     }
