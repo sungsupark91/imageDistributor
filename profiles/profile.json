@@ -1,6 +1,6 @@
 {
     "sourceBasePath": "/volume1/photo/이미지자동분류",
-    "destinationBasePath": "/volume1/photo/분류됨",
+    "destinationBasePath": "/volume1/photo/수빈",
     "targetExtensions": ["ARW", "DNG", "RAF", "JPG", "JPEG", "PNG", "HEIC", "MP4", "MOV"],
     "rules": [
         {

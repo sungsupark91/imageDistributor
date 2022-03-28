@@ -34,7 +34,8 @@ function getFilmInfo(tags) {
         return;
     }
 
-    return `[F${tags.Aperture}][${tags.ShutterSpeed.replace("/", "\\")}][${
+    // 슬래시 특수문자여야함
+    return `[F${tags.Aperture}][${tags.ShutterSpeed.replace("/", "∕")}][${
         tags.FocalLength
     }]`;
 }
