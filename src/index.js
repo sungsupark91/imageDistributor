@@ -64,8 +64,6 @@ function getRuleByExtension(extension) {
     }
 }
 
-// function
-
 // 파일이 존재할 경우 신규 파일
 function renameFileIfNeeded(path, i = 0) {
     if (!fs.existsSync(path)) {
@@ -115,10 +113,26 @@ async function distributeFile(sourcePath) {
         subDirectory = "Phone";
     }
 
+    const directoriesInYear = fs
+        .readdirSync(Path.resolve(profile.destinationBasePath, year))
+        .filter((fileOrDir) =>
+            fs
+                .statSync(
+                    Path.resolve(profile.destinationBasePath, year, fileOrDir)
+                )
+                .isDirectory()
+        );
+
+    const monthDay = `${month}${day}`;
+
+    const alreadyCreatedDirectory = directoriesInYear
+        .map((dir) => dir.trim())
+        .find((dir) => dir.startsWith(monthDay));
+
     const destinationPath = Path.resolve(
         profile.destinationBasePath,
         year,
-        `${month}${day}`,
+        alreadyCreatedDirectory ? alreadyCreatedDirectory : monthDay,
         subDirectory ? subDirectory : "",
         `${
             !isPhone && filmInfo ? `${filmInfo}_` : ""
