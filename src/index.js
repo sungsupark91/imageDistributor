@@ -118,9 +118,9 @@ async function distributeFile(sourcePath) {
     const formattedPath = Path.resolve(
         profile.destinationBasePath,
         Default(profile.folderFormat, "")
-            .replace("@yyyy", year)
-            .replace("@mm", month)
-            .replace("@dd", day)
+            .replace(/@yyyy/gi, year)
+            .replace(/@mm/gi, month)
+            .replace(/@dd/gi, day)
     );
 
     // 0101
@@ -162,10 +162,15 @@ const watcher = chokidar.watch(profile.sourceBasePath, {
 
 watcher.on("add", (path) => {
     // source 최상위 폴더에 들어오는 이미지가 아닌 경우 처리하지 않는다.
-    if (Path.dirname(path) !== profile.sourceBasePath) {
+    // Recursive: false 이면 처리 가능!
+    if (
+        Path.dirname(path) !== profile.sourceBasePath &&
+        profile.recursive === false
+    ) {
         return;
     }
 
+    // TODO: 용량 몇 미만은 제외시키기
     if (!isTarget(path)) {
         return;
     }

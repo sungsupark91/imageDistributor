@@ -1,0 +1,19 @@
+{
+    "sourceBasePath": "/volume1/photo_raw/이미지자동분류(raw)",
+    "destinationBasePath": "/volume1/photo_raw",
+    "targetExtensions": ["ARW", "DNG", "RAF"],
+    "recursive": true,
+    "folderFormat": "@yyyy/@yyyy-@mm-@dd",
+    "rules": [
+        {
+            "use": true,
+            "targetExtensions": ["ARW"],
+            "subDirectoryName": "A7M3-Raw"
+        },
+        {
+            "use": true,
+            "targetExtensions": ["RAF", "DNG"],
+            "subDirectoryName": "X100V-Raw"
+        }
+    ]
+}

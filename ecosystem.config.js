@@ -10,5 +10,10 @@ module.exports = {
             script: "src/index.js",
             args: "snap",
         },
+        {
+            name: "Raw",
+            script: "src/index.js",
+            args: "raw",
+        },
     ],
 };
