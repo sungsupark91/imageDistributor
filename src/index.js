@@ -113,6 +113,8 @@ async function distributeFile(sourcePath) {
         subDirectory = "Phone";
     }
 
+    createDirectoryIfNotExists(Path.resolve(profile.destinationBasePath, year));
+
     const directoriesInYear = fs
         .readdirSync(Path.resolve(profile.destinationBasePath, year))
         .filter((fileOrDir) =>

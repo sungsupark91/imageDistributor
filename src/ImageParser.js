@@ -33,11 +33,11 @@ function getFilmInfo(tags) {
     if (!tags.Aperture || !tags.ShutterSpeed || !tags.FocalLength) {
         return;
     }
-
     // 슬래시 특수문자여야함
-    return `[F${tags.Aperture}][${tags.ShutterSpeed.replace("/", "∕")}][${
-        tags.FocalLength
-    }]`;
+    return `[F${tags.Aperture}][${new String(tags.ShutterSpeed).replace(
+        "/",
+        "∕"
+    )}][${tags.FocalLength}]`;
 }
 
 module.exports = {
