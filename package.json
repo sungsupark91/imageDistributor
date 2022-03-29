@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "stop": "pm2 delete all",
-    "local": "pm2 start ecosystem.config.js --no-daemon",
+    "local": "node src/index.js localProfile",
     "start": "pm2 start ecosystem.config.js"
   },
   "author": "",

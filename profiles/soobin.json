@@ -1,0 +1,23 @@
+{
+    "sourceBasePath": "/volume1/photo/이미지자동분류",
+    "destinationBasePath": "/volume1/photo/수빈",
+    "targetExtensions": ["ARW", "DNG", "RAF", "JPG", "JPEG", "PNG", "HEIC", "MP4", "MOV"],
+    "folderFormat": "@yyyy/@mm@dd",
+    "rules": [
+        {
+            "use": true,
+            "targetExtensions": ["ARW"],
+            "subDirectoryName": "A7M3-Raw"
+        },
+        {
+            "use": true,
+            "targetExtensions": ["RAF", "DNG"],
+            "subDirectoryName": "X100V-Raw"
+        },
+        {
+            "use": true,
+            "targetExtensions": ["MP4", "MOV"],
+            "subDirectoryName": "영상"
+        }
+    ]
+}

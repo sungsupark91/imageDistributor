@@ -2,6 +2,7 @@ const fs = require("fs");
 const Path = require("path");
 const ImageParser = require("./ImageParser");
 const chokidar = require("chokidar");
+const { Default } = require("./util/Default");
 
 const profileName = process.argv[2];
 
@@ -103,39 +104,47 @@ async function distributeFile(sourcePath) {
         await ImageParser.parseImage(sourcePath);
     const extension = getExtension(Path.basename(sourcePath));
     const rule = getRuleByExtension(extension);
-    let subDirectory;
+    let subDir;
     if (rule) {
-        subDirectory = rule.subDirectoryName;
+        subDir = rule.subDirectoryName;
     }
 
     // FIXME: 프로필로 관리
     if (isPhone) {
-        subDirectory = "Phone";
+        subDir = "Phone";
     }
 
-    createDirectoryIfNotExists(Path.resolve(profile.destinationBasePath, year));
+    // /base/2020/0101
+    const formattedPath = Path.resolve(
+        profile.destinationBasePath,
+        Default(profile.folderFormat, "")
+            .replace("@yyyy", year)
+            .replace("@mm", month)
+            .replace("@dd", day)
+    );
 
-    const directoriesInYear = fs
-        .readdirSync(Path.resolve(profile.destinationBasePath, year))
+    // 0101
+    const baseName = Path.basename(formattedPath);
+
+    // /base/2020
+    const dirPath = Path.resolve(formattedPath, "..");
+    createDirectoryIfNotExists(dirPath);
+
+    // 0101 설날 << 이런식의 폴더 찾아내서 있으면 여기에 입력함.
+    // 0101 설날이 반환됨
+    const existingDirName = fs
+        .readdirSync(dirPath)
         .filter((fileOrDir) =>
-            fs
-                .statSync(
-                    Path.resolve(profile.destinationBasePath, year, fileOrDir)
-                )
-                .isDirectory()
-        );
-
-    const monthDay = `${month}${day}`;
-
-    const alreadyCreatedDirectory = directoriesInYear
+            fs.statSync(Path.resolve(dirPath, fileOrDir)).isDirectory()
+        )
         .map((dir) => dir.trim())
-        .find((dir) => dir.startsWith(monthDay));
+        .find((dir) => dir.startsWith(baseName));
 
     const destinationPath = Path.resolve(
-        profile.destinationBasePath,
-        year,
-        alreadyCreatedDirectory ? alreadyCreatedDirectory : monthDay,
-        subDirectory ? subDirectory : "",
+        existingDirName
+            ? Path.resolve(formattedPath, "..", existingDirName)
+            : formattedPath,
+        Default(subDir, ""),
         `${
             !isPhone && filmInfo ? `${filmInfo}_` : ""
         }${hour}시${minute}분${second}초.${extension}`

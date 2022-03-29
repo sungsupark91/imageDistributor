@@ -1,9 +1,14 @@
 module.exports = {
     apps: [
         {
-            name: "profile1",
+            name: "수빈",
             script: "src/index.js",
-            args: "profile",
+            args: "soobin",
+        },
+        {
+            name: "스냅",
+            script: "src/index.js",
+            args: "snap",
         },
     ],
 };
