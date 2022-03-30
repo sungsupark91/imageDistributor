@@ -36,7 +36,7 @@ function getFilmInfo(tags) {
     // 슬래시 특수문자여야함
     return `[F${tags.Aperture}][${new String(tags.ShutterSpeed).replace(
         "/",
-        "∕"
+        "_"
     )}][${tags.FocalLength}]`;
 }
 
