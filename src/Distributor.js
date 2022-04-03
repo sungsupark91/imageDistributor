@@ -2,7 +2,7 @@ const FileUtils = require('./util/FileUtils');
 const Path = require('path');
 const ImageParser = require('./ImageParser');
 const cliColor = require('cli-color');
-const Profile = require('./profile');
+const Profile = require('./Profile');
 const profile = Profile.profile;
 
 async function run(sourcePath, viewOnly = true) {
