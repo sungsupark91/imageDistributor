@@ -13,7 +13,8 @@ function resolveFormat(formatStr = '', values = {}) {
         .replace(/@분/gi, values.minute || '')
         .replace(/@초/gi, values.second || '')
         .replace(/@원본/gi, values.originalFileName || '')
-        .replace(/@모델명/gi, values.model || '');
+        .replace(/@모델명/gi, values.model || '')
+        .replace(/\s/g, '_');
 }
 
 function resolvePathRule(filePath) {
@@ -178,9 +179,6 @@ ${cliColor.bold.cyan(
 
         - VIDEO 서브 폴더 생성: ${showFlag(profile.flags.remainFilmInfo)}
         (동영상인 경우 VIDEO 서브폴더에 이동합니다)
-
-        - 하위폴더 감지: ${showFlag(profile.flags.recursive)}
-        (파일 감시 폴더의 하위폴더에 있는 모든 파일을 스캔합니다)
 
         - 설명이 있는 폴더 우선으로 파일 이동: ${showFlag(
             profile.flags.folderWithDescription

@@ -47,11 +47,12 @@ function findFolderWithDescription(dirPathFrom, findBaseName) {
         .find(dir => dir.startsWith(findBaseName));
 }
 
-function getAllFilesInPath(path, recursive = false) {
+// FIXME:!!! 이거 사용금지
+function getAllFilesInPath(dirPath, recursive = false) {
     return fs
-        .readdirSync(path)
+        .readdirSync(dirPath)
         .map(fileOrDir => {
-            const currentPath = Path.resolve(path, fileOrDir);
+            const currentPath = Path.resolve(dirPath, fileOrDir);
             if (fs.statSync(currentPath).isDirectory() && recursive === true) {
                 return getAllFilesInPath(currentPath, recursive);
             }
@@ -61,6 +62,10 @@ function getAllFilesInPath(path, recursive = false) {
 }
 
 function executeAfterFileCopyIsDone(path, doneCb, previousMtimeMs) {
+    if (!fs.existsSync(path)) {
+        return;
+    }
+
     if (!previousMtimeMs) {
         previousMtimeMs = fs.statSync(path).mtimeMs;
     }
@@ -98,8 +103,15 @@ function getFs() {
     return fs;
 }
 
+function removeEaDir(pathThatContainsEadir = '') {
+    const eaDirParentPath = pathThatContainsEadir.split('@eaDir')[0];
+    const eadirPath = Path.resolve(eaDirParentPath, '@eaDir');
+    fs.rmSync(eadirPath, { recursive: true, force: true, maxRetries: 3 });
+}
+
 module.exports = {
     getFs,
+    removeEaDir,
     createDirectoryIfNotExists,
     resolveFileName,
     moveFileSync,

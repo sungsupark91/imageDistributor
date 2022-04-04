@@ -1,6 +1,9 @@
-const exiftool = require('exiftool-vendored').exiftool;
+const { exiftool } = require('exiftool-vendored');
+
 const Path = require('path');
 const StringUtils = require('./util/StringUtils');
+const fs = require('fs');
+
 const RAW_EXTENSIONS = [
     'CRW',
     'CR2',
@@ -69,6 +72,10 @@ function getFilmInfo(tags) {
 
 module.exports = {
     parseImage: async imagePath => {
+        if (!fs.existsSync(imagePath)) {
+            return;
+        }
+
         try {
             const tags = await exiftool.read(Path.resolve(imagePath));
 

@@ -107,10 +107,7 @@ async function processAllNewFilesFromSourcePaths(cb) {
     const filePaths = [];
 
     Profile.getSourcePaths().forEach(path => {
-        const allFiles = FileUtils.getAllFilesInPath(
-            path,
-            Profile.profile.flags.recursive
-        );
+        const allFiles = FileUtils.getAllFilesInPath(path);
 
         filePaths.push(...allFiles);
     });
@@ -137,49 +134,49 @@ async function promptActionsUntilExit() {
                         await pressAnyKeyToContinue();
                     }
                 },
-                {
-                    name: '이미지 분류 프리뷰',
-                    value: async () => {
-                        if (
-                            await confirm(
-                                '이 작업은 시간이 조금 소요될 수 있어요. 진행할까요?'
-                            )
-                        ) {
-                            await processAllNewFilesFromSourcePaths(
-                                Distributor.previewFile
-                            );
+                // {
+                //     name: '이미지 분류 프리뷰',
+                //     value: async () => {
+                //         if (
+                //             await confirm(
+                //                 '이 작업은 시간이 조금 소요될 수 있어요. 진행할까요?'
+                //             )
+                //         ) {
+                //             await processAllNewFilesFromSourcePaths(
+                //                 Distributor.previewFile
+                //             );
 
-                            console.log(
-                                cliColor.blueBright(
-                                    `확인하고 이상 없으면 "이미지 분류 실행" 메뉴를 실행해서 파일을 옮기셔도 됩니다.`
-                                )
-                            );
+                //             console.log(
+                //                 cliColor.blueBright(
+                //                     `확인하고 이상 없으면 "이미지 분류 실행" 메뉴를 실행해서 파일을 옮기셔도 됩니다.`
+                //                 )
+                //             );
 
-                            await pressAnyKeyToContinue();
-                        }
-                    }
-                },
-                new inquirer.Separator(),
-                {
-                    name: '이미지 분류 실행',
-                    value: async () => {
-                        if (
-                            await confirm(
-                                '이미지가 모두 대상 경로로 이동됩니다. 처리가 끝나면 프로그램은 자동 종료됩니다. 진행할까요?'
-                            )
-                        ) {
-                            await processAllNewFilesFromSourcePaths(
-                                Distributor.processFile
-                            );
+                //             await pressAnyKeyToContinue();
+                //         }
+                //     }
+                // },
+                // new inquirer.Separator(),
+                // {
+                //     name: '이미지 분류 실행',
+                //     value: async () => {
+                //         if (
+                //             await confirm(
+                //                 '이미지가 모두 대상 경로로 이동됩니다. 처리가 끝나면 프로그램은 자동 종료됩니다. 진행할까요?'
+                //             )
+                //         ) {
+                //             await processAllNewFilesFromSourcePaths(
+                //                 Distributor.processFile
+                //             );
 
-                            console.log(
-                                cliColor.blueBright(`작업을 끝냈습니다.`)
-                            );
+                //             console.log(
+                //                 cliColor.blueBright(`작업을 끝냈습니다.`)
+                //             );
 
-                            await pressAnyKeyToContinue();
-                        }
-                    }
-                },
+                //             await pressAnyKeyToContinue();
+                //         }
+                //     }
+                // },
                 (() => {
                     if (isBackgroundOnline) {
                         return new inquirer.Separator(

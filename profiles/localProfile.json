@@ -1,0 +1,25 @@
+{
+    "targetExtensions": ["JPG", "JPEG", "PNG", "HEIC", "ARW", "RAF", "DNG", "MP4", "MOV"],
+    "pathRules": [
+        {
+            "from": "/Users/sungsupark/Desktop/test/source/이미지자동분류(수빈)",
+            "to": "/Users/sungsupark/Desktop/test/target2/수빈2",
+            "folderFormat": "@년/@월@일",
+            "fileFormat": "@년@월@일@시@분@초_@모델명"
+        },
+        {
+            "from": "/Users/sungsupark/Desktop/test/source/이미지자동분류(raw)",
+            "to": "/Users/sungsupark/Desktop/test/target2/로우파일",
+            "folderFormat": "@년-@월-@일",
+            "fileFormat": "@년@월@일@시@분@초_@모델명"
+        }
+    ],
+    "flags": {
+        "subFolderByPhone": false,
+        "subFolderByRaw": false,
+        "subFolderByVideo": true,
+        "remainFilmInfo": false,
+        "folderWithDescription": true,
+        "usePolling": false
+    }
+}
