@@ -11,13 +11,13 @@
             "from": "/volume1/photo/이미지자동분류(수빈)",
             "to": "/volume1/photo/수빈",
             "folderFormat": "@년/@월@일",
-            "fileFormat": "@년@월@일@시@분@초 @모델명"
+            "fileFormat": "@년-@월-@일__@시시_@분분_@초초 @모델명"
         },
         {
-            "from": "/volume1/photo/이미지자동분류(개인)",
+            "from": "/volume1/photo/이미지자동분류(일반스냅)",
             "to": "/volume1/photo/일반스냅",
             "folderFormat": "@년/@년-@월",
-            "fileFormat": "@년@월@일@시@분@초 @모델명"
+            "fileFormat": "@년-@월-@일__@시시_@분분_@초초 @모델명"
         }
         
     ],
