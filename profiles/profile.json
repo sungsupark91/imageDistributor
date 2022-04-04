@@ -2,31 +2,30 @@
     "targetExtensions": ["JPG", "JPEG", "PNG", "HEIC", "ARW", "RAF", "DNG", "MP4", "MOV"],
     "pathRules": [
         {
-            "from": "/volume1/photo_raw/이미지자동분류(raw)",
-            "to": "/volume1/photo_raw",
-            "folderFormat": "@년/@년-@월-@일",
-            "fileFormat": "@시시@분분@초초"
+            "from": "/Users/sungsupark/Desktop/test/source/이미지자동분류(전체)",
+            "to": "/Users/sungsupark/Desktop/test/target",
+            "folderFormat": "@년/@월",
+            "fileFormat": "@원본"
         },
         {
-            "from": "/volume1/photo/이미지자동분류(수빈)",
-            "to": "/volume1/photo/수빈",
-            "folderFormat": "@년/@월@일",
-            "fileFormat": "@시시@분분@초초"
+            "from": "/Users/sungsupark/Desktop/test/source/이미지자동분류(여자친구)",
+            "to": "/Users/sungsupark/Desktop/test2/여자친구",
+            "folderFormat": "@년-@월-@일",
+            "fileFormat": "@월-@일_@원본"
         },
         {
-            "from": "/volume1/photo/이미지자동분류(개인)",
-            "to": "/volume1/photo/일반스냅",
-            "folderFormat": "@년/@월@일",
-            "fileFormat": "@시시@분분@초초"
+            "from": "/Users/sungsupark/Desktop/test/source/이미지자동분류(가족사진)",
+            "to": "/Users/sungsupark/Desktop/test2/가족사진",
+            "folderFormat": "@년-@월-@일",
+            "fileFormat": "@년-@월-@일_@시시 @분분 @초초"
         }
     ],
     "flags": {
-        "subFolderByPhone": true,
-        "subFolderByRaw": false,
+        "subFolderByPhone": false,
+        "subFolderByRaw": true,
         "subFolderByVideo": true,
-        "remainFilmInfo": true,
+        "remainFilmInfo": false,
         "recursive": false,
-        "folderWithDescription": true,
-        "usePolling": false
+        "folderWithDescription": true
     }
 }
