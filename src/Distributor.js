@@ -10,14 +10,14 @@ async function run(sourcePath, viewOnly = true) {
         return;
     }
 
-    const originalFileName = Path.basename(sourcePath);
-    if (!originalFileName) {
+    const originalFileNameWithExtension = Path.basename(sourcePath);
+    if (!originalFileNameWithExtension) {
         return;
     }
 
-    const extension = FileUtils.getExtension(originalFileName);
+    const extension = FileUtils.getExtension(originalFileNameWithExtension);
     const originalFileNameWithoutExtension =
-        FileUtils.getFileNameWithoutExtension(originalFileName);
+        FileUtils.getFileNameWithoutExtension(originalFileNameWithExtension);
     const parentDirectoryPath = Path.dirname(sourcePath);
 
     if (!Profile.isTargetExtension(extension)) {
@@ -48,7 +48,9 @@ async function run(sourcePath, viewOnly = true) {
         hour,
         minute,
         second,
-        duration
+        duration,
+        isFaceTimePhoto,
+        isFaceTimeVideo
     } = await ImageParser.parseImage(sourcePath);
 
     let subFolder = '';
@@ -60,6 +62,7 @@ async function run(sourcePath, viewOnly = true) {
     const isShortVideo = isVideo && duration && duration < 4;
     if (
         isVideo &&
+        !isFaceTimeVideo &&
         profile.flags.subFolderByVideo === true &&
         !(profile.flags.skipShortVideoSubFolder === true && isShortVideo)
     ) {
@@ -101,16 +104,23 @@ async function run(sourcePath, viewOnly = true) {
     if (profile.flags.remainFilmInfo === true && filmInfo) {
         newFileName += `${filmInfo}_`;
     }
-    newFileName += `${Profile.resolveFormat(fileFormat, {
-        year: year,
-        month: month,
-        day: day,
-        hour: hour,
-        minute: minute,
-        second: second,
-        originalFileName: originalFileNameWithoutExtension,
-        model: model
-    })}.${extension}`;
+
+    // 2개 이미지 파일명이 동일해야 LIVE VIEW 가 되고 같은 위치에 있어야 함.
+    if (isFaceTimePhoto || isFaceTimeVideo) {
+        subFolder = '';
+        newFileName = `${year}${month}${day}${hour}${minute}${second}_FaceTime.${extension}`;
+    } else {
+        newFileName += `${Profile.resolveFormat(fileFormat, {
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            originalFileName: originalFileNameWithoutExtension,
+            model: model
+        })}.${extension}`;
+    }
 
     const destinationPath = Path.resolve(
         targetBaseParentPath,

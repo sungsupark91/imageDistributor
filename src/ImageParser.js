@@ -76,6 +76,7 @@ module.exports = {
 
         try {
             const tags = await exiftool.read(Path.resolve(imagePath));
+            // console.log(tags);
             return {
                 model: tags.Model,
                 isRaw: StringUtils.containsCaseInsensitiveTrim(
@@ -92,7 +93,9 @@ module.exports = {
                 ...getDate(tags),
                 type: tags.Model,
                 filmInfo: getFilmInfo(tags) || '',
-                duration: tags.Duration
+                duration: tags.Duration,
+                isFaceTimePhoto: tags.UserComment === 'FaceTime Photo',
+                isFaceTimeVideo: tags.Keywords === 'FaceTime'
             };
         } catch (e) {
             console.error(e);
