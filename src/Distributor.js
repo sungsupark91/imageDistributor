@@ -47,7 +47,8 @@ async function run(sourcePath, viewOnly = true) {
         day,
         hour,
         minute,
-        second
+        second,
+        duration
     } = await ImageParser.parseImage(sourcePath);
 
     let subFolder = '';
@@ -56,7 +57,12 @@ async function run(sourcePath, viewOnly = true) {
         subFolder = 'Phone';
     }
 
-    if (isVideo && profile.flags.subFolderByVideo === true) {
+    const isShortVideo = isVideo && duration && duration < 4;
+    if (
+        isVideo &&
+        profile.flags.subFolderByVideo === true &&
+        !(profile.flags.skipShortVideoSubFolder === true && isShortVideo)
+    ) {
         subFolder = 'Video';
     }
 

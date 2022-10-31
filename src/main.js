@@ -156,27 +156,27 @@ async function promptActionsUntilExit() {
                 //         }
                 //     }
                 // },
-                // new inquirer.Separator(),
-                // {
-                //     name: '이미지 분류 실행',
-                //     value: async () => {
-                //         if (
-                //             await confirm(
-                //                 '이미지가 모두 대상 경로로 이동됩니다. 처리가 끝나면 프로그램은 자동 종료됩니다. 진행할까요?'
-                //             )
-                //         ) {
-                //             await processAllNewFilesFromSourcePaths(
-                //                 Distributor.processFile
-                //             );
+                new inquirer.Separator(),
+                {
+                    name: '이미지 분류 실행',
+                    value: async () => {
+                        if (
+                            await confirm(
+                                '이미지가 모두 대상 경로로 이동됩니다. 처리가 끝나면 프로그램은 자동 종료됩니다. 진행할까요?'
+                            )
+                        ) {
+                            await processAllNewFilesFromSourcePaths(
+                                Distributor.processFile
+                            );
 
-                //             console.log(
-                //                 cliColor.blueBright(`작업을 끝냈습니다.`)
-                //             );
+                            console.log(
+                                cliColor.blueBright(`작업을 끝냈습니다.`)
+                            );
 
-                //             await pressAnyKeyToContinue();
-                //         }
-                //     }
-                // },
+                            await pressAnyKeyToContinue();
+                        }
+                    }
+                },
                 (() => {
                     if (isBackgroundOnline) {
                         return new inquirer.Separator(

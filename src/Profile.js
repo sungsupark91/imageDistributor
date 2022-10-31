@@ -177,7 +177,7 @@ ${cliColor.bold.cyan(
         - RAW 촬영 서브 폴더 생성: ${showFlag(profile.flags.subFolderByRaw)}
         (RAW 촬영 정보일 경우 RAW 이름의 서브 폴더를 생성하여 이동합니다)
 
-        - VIDEO 서브 폴더 생성: ${showFlag(profile.flags.remainFilmInfo)}
+        - VIDEO 서브 폴더 생성: ${showFlag(profile.flags.subFolderByVideo)}
         (동영상인 경우 VIDEO 서브폴더에 이동합니다)
 
         - 설명이 있는 폴더 우선으로 파일 이동: ${showFlag(
@@ -188,6 +188,10 @@ ${cliColor.bold.cyan(
 
         - 폴링 방식으로 백그라운드 파일 감지: ${showFlag(
             profile.flags.usePolling
+        )}
+
+        - 4초 미만 영상 서브 폴더 스킵: ${showFlag(
+            profile.flags.skipShortVideoSubFolder
         )}
         (기본값: false. 백그라운드 파일 감지에 문제가 생기면 true 로 변경해보세요.)
 ${cliColor.bold.cyan(

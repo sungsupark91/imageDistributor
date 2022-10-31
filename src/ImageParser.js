@@ -31,8 +31,6 @@ const RAW_EXTENSIONS = [
 ];
 
 function getDate(tags) {
-    // console.log(tags);
-
     let date;
     if (tags.CreationDate && tags.CreationDate.year) {
         date = tags.CreationDate;
@@ -78,7 +76,6 @@ module.exports = {
 
         try {
             const tags = await exiftool.read(Path.resolve(imagePath));
-
             return {
                 model: tags.Model,
                 isRaw: StringUtils.containsCaseInsensitiveTrim(
@@ -94,7 +91,8 @@ module.exports = {
                 isScreenshoot: tags.UserComment === 'Screenshot',
                 ...getDate(tags),
                 type: tags.Model,
-                filmInfo: getFilmInfo(tags) || ''
+                filmInfo: getFilmInfo(tags) || '',
+                duration: tags.Duration
             };
         } catch (e) {
             console.error(e);
