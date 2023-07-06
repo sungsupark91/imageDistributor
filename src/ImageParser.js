@@ -37,6 +37,7 @@ function getDate(tags) {
     } else if (tags.CreateDate && tags.CreateDate.year) {
         date = tags.CreateDate;
     } else if (tags.FileModifyDate && tags.FileModifyDate.year) {
+        console.error(tags);
         date = tags.FileModifyDate;
     } else if (tags.ProfileDateTime && tags.ProfileDateTime.year) {
         date = tags.ProfileDateTime;
@@ -76,7 +77,6 @@ module.exports = {
 
         try {
             const tags = await exiftool.read(Path.resolve(imagePath));
-            // console.log(tags);
             return {
                 model: tags.Model,
                 isRaw: StringUtils.containsCaseInsensitiveTrim(

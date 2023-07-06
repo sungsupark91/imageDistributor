@@ -19,7 +19,7 @@ function resolveFormat(formatStr = '', values = {}) {
 
 function resolvePathRule(filePath) {
     for (const pathRule of profile.pathRules) {
-        if (filePath.startsWith(pathRule.from)) {
+        if (Path.normalize(filePath).startsWith(Path.normalize(pathRule.from))) {
             return pathRule;
         }
     }

@@ -70,21 +70,21 @@ function executeAfterFileCopyIsDone(path, doneCb, previousMtimeMs) {
         previousMtimeMs = fs.statSync(path).mtimeMs;
     }
 
-    fs.stat(path, function (err, stat) {
-        if (err) {
-            console.error(err);
-            return;
-        }
-
-        const currentMtimeMs = stat.mtimeMs;
-        if (stat.size > 0 && currentMtimeMs === previousMtimeMs) {
-            doneCb();
-        } else {
-            setTimeout(() => {
+    setTimeout(() => {
+        fs.stat(path, function (err, stat) {
+            if (err) {
+                console.error(err);
+                return;
+            }
+    
+            const currentMtimeMs = stat.mtimeMs;
+            if (stat.size > 0 && currentMtimeMs === previousMtimeMs) {
+                doneCb();
+            } else {
                 executeAfterFileCopyIsDone(path, doneCb, currentMtimeMs);
-            }, 1000);
-        }
-    });
+            }
+        });
+    }, 1000);
 }
 
 function getExtension(fileName) {
